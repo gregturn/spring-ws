@@ -89,7 +89,7 @@ public class WsdlDefinitionHandlerAdapterTest {
 	public void transformLocations() throws Exception {
 		adapter.setTransformLocations(true);
 		request.setMethod(HttpTransportConstants.METHOD_GET);
-		request.setScheme("http");
+		request.setScheme("https");
 		request.setServerName("example.com");
 		request.setServerPort(8080);
 		request.setContextPath("/context");
@@ -112,7 +112,7 @@ public class WsdlDefinitionHandlerAdapterTest {
 
 	@Test
 	public void transformLocationFullUrl() throws Exception {
-		request.setScheme("http");
+		request.setScheme("https");
 		request.setServerName("example.com");
 		request.setServerPort(8080);
 		request.setContextPath("/context");
@@ -127,12 +127,12 @@ public class WsdlDefinitionHandlerAdapterTest {
 
 	@Test
 	public void transformLocationEmptyContextFullUrl() throws Exception {
-		request.setScheme("http");
+		request.setScheme("https");
 		request.setServerName("example.com");
 		request.setServerPort(8080);
 		request.setContextPath("");
 		request.setRequestURI("/service.wsdl");
-		String oldLocation = "http://localhost:8080/service";
+		String oldLocation = "https://localhost:8080/service";
 
 		String result = adapter.transformLocation(oldLocation, request);
 		Assert.assertNotNull("No result", result);
@@ -141,7 +141,7 @@ public class WsdlDefinitionHandlerAdapterTest {
 
 	@Test
 	public void transformLocationRelativeUrl() throws Exception {
-		request.setScheme("http");
+		request.setScheme("https");
 		request.setServerName("example.com");
 		request.setServerPort(8080);
 		request.setContextPath("/context");
@@ -156,7 +156,7 @@ public class WsdlDefinitionHandlerAdapterTest {
 
 	@Test
 	public void transformLocationEmptyContextRelativeUrl() throws Exception {
-		request.setScheme("http");
+		request.setScheme("https");
 		request.setServerName("example.com");
 		request.setServerPort(8080);
 		request.setContextPath("");

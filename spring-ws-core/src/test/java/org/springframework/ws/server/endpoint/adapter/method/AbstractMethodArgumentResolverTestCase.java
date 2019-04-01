@@ -18,6 +18,9 @@ package org.springframework.ws.server.endpoint.adapter.method;
 
 import javax.xml.transform.TransformerException;
 
+import org.apache.axiom.om.OMAbstractFactory;
+import org.apache.axiom.soap.SOAPFactory;
+
 import org.springframework.ws.MockWebServiceMessage;
 import org.springframework.ws.MockWebServiceMessageFactory;
 import org.springframework.ws.context.DefaultMessageContext;
@@ -29,12 +32,9 @@ import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 import org.springframework.xml.transform.StringSource;
 import org.springframework.xml.transform.TransformerObjectSupport;
 
-import org.apache.axiom.om.OMAbstractFactory;
-import org.apache.axiom.soap.SOAPFactory;
-
 public class AbstractMethodArgumentResolverTestCase extends TransformerObjectSupport {
 
-	protected static final String NAMESPACE_URI = "https://springframework.org/ws";
+	protected static final String NAMESPACE_URI = "http://springframework.org/ws";
 
 	protected static final String LOCAL_NAME = "request";
 

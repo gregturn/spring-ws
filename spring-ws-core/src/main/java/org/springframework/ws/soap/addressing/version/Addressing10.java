@@ -35,7 +35,7 @@ import org.springframework.ws.soap.addressing.core.MessageAddressingProperties;
 
 public class Addressing10 extends AbstractAddressingVersion {
 
-	private static final String NAMESPACE_URI = "https://www.w3.org/2005/08/addressing";
+	private static final String NAMESPACE_URI = "http://www.w3.org/2005/08/addressing";
 
 	@Override
 	public void addAddressingHeaders(SoapMessage message, MessageAddressingProperties map) {

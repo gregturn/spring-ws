@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,6 +31,9 @@ import org.springframework.ws.context.MessageContext;
 import org.springframework.ws.server.endpoint.MethodEndpoint;
 import org.springframework.ws.server.endpoint.adapter.method.MethodArgumentResolver;
 import org.springframework.ws.server.endpoint.adapter.method.MethodReturnValueHandler;
+
+import static org.easymock.EasyMock.*;
+import static org.junit.Assert.*;
 
 /** @author Arjen Poutsma */
 public class DefaultMethodEndpointAdapterTest {
@@ -124,7 +125,7 @@ public class DefaultMethodEndpointAdapterTest {
 
 	@Test
 	public void invokeSupported() throws Exception {
-		MockWebServiceMessage request = new MockWebServiceMessage("<root xmlns='https://springframework.org'/>");
+		MockWebServiceMessage request = new MockWebServiceMessage("<root xmlns='http://springframework.org'/>");
 		MessageContext messageContext = new DefaultMessageContext(request, new MockWebServiceMessageFactory());
 
 		String value = "Foo";
@@ -151,7 +152,7 @@ public class DefaultMethodEndpointAdapterTest {
 
 	@Test
 	public void invokeNullReturnValue() throws Exception {
-		MockWebServiceMessage request = new MockWebServiceMessage("<root xmlns='https://springframework.org'/>");
+		MockWebServiceMessage request = new MockWebServiceMessage("<root xmlns='http://springframework.org'/>");
 		MessageContext messageContext = new DefaultMessageContext(request, new MockWebServiceMessageFactory());
 
 		String value = "Foo";
@@ -172,7 +173,7 @@ public class DefaultMethodEndpointAdapterTest {
 
 	@Test
 	public void invokeException() throws Exception {
-		MockWebServiceMessage request = new MockWebServiceMessage("<root xmlns='https://springframework.org'/>");
+		MockWebServiceMessage request = new MockWebServiceMessage("<root xmlns='http://springframework.org'/>");
 		MessageContext messageContext = new DefaultMessageContext(request, new MockWebServiceMessageFactory());
 
 		String value = "Foo";

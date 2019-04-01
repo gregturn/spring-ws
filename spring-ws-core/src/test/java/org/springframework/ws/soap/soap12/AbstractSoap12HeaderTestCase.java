@@ -19,14 +19,18 @@ package org.springframework.ws.soap.soap12;
 import java.util.Iterator;
 import javax.xml.namespace.QName;
 
-import static org.custommonkey.xmlunit.XMLAssert.assertXMLEqual;
-import static org.junit.Assert.*;
 import org.junit.Test;
 
 import org.springframework.ws.soap.AbstractSoapHeaderTestCase;
 import org.springframework.ws.soap.SoapHeaderElement;
 import org.springframework.ws.soap.SoapVersion;
 import org.springframework.xml.transform.StringResult;
+
+import static org.custommonkey.xmlunit.XMLAssert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractSoap12HeaderTestCase extends AbstractSoapHeaderTestCase {
 
@@ -52,19 +56,19 @@ public abstract class AbstractSoap12HeaderTestCase extends AbstractSoapHeaderTes
 	@Test
 	public void testAddNotUnderstood() throws Exception {
 		Soap12Header soap12Header = (Soap12Header) soapHeader;
-		QName headerName = new QName("https://www.springframework.org", "NotUnderstood", "spring-ws");
+		QName headerName = new QName("http://www.springframework.org", "NotUnderstood", "spring-ws");
 		soap12Header.addNotUnderstoodHeaderElement(headerName);
 		StringResult result = new StringResult();
 		transformer.transform(soapHeader.getSource(), result);
 		assertXMLEqual("Invalid contents of header", "<Header xmlns='http://www.w3.org/2003/05/soap-envelope' >" +
-				"<NotUnderstood qname='spring-ws:NotUnderstood' xmlns:spring-ws='https://www.springframework.org' />" +
+				"<NotUnderstood qname='spring-ws:NotUnderstood' xmlns:spring-ws='http://www.springframework.org' />" +
 				"</Header>", result.toString());
 	}
 
 	@Test
 	public void testAddUpgrade() throws Exception {
 		String[] supportedUris =
-				new String[]{"http://schemas.xmlsoap.org/soap/envelope/", "http://www.w3.org/2003/05/soap-envelope"};
+				new String[]{"http://schemas.xmlsoap.org/soap/envelope", "http://www.w3.org/2003/05/soap-envelope"};
 		Soap12Header soap12Header = (Soap12Header) soapHeader;
 		SoapHeaderElement header = soap12Header.addUpgradeHeaderElement(supportedUris);
 		StringResult result = new StringResult();

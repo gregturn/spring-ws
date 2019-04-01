@@ -19,16 +19,18 @@ package org.springframework.ws.soap;
 import java.util.Locale;
 import javax.xml.transform.dom.DOMResult;
 
-import org.springframework.xml.transform.StringResult;
-import org.springframework.xml.transform.StringSource;
-
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import static org.custommonkey.xmlunit.XMLAssert.assertXMLEqual;
-import static org.junit.Assert.*;
+import org.springframework.xml.transform.StringResult;
+import org.springframework.xml.transform.StringSource;
+
+import static org.custommonkey.xmlunit.XMLAssert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractSoapBodyTestCase extends AbstractSoapElementTestCase {
 
@@ -44,14 +46,14 @@ public abstract class AbstractSoapBodyTestCase extends AbstractSoapElementTestCa
 
 	@Test
 	public void testPayload() throws Exception {
-		String payload = "<payload xmlns='https://www.springframework.org' />";
+		String payload = "<payload xmlns='http://www.springframework.org' />";
 		transformer.transform(new StringSource(payload), soapBody.getPayloadResult());
 		assertPayloadEqual(payload);
 	}
 
 	@Test
 	public void testGetPayloadResultTwice() throws Exception {
-		String payload = "<payload xmlns='https://www.springframework.org' />";
+		String payload = "<payload xmlns='http://www.springframework.org' />";
 		transformer.transform(new StringSource(payload), soapBody.getPayloadResult());
 		transformer.transform(new StringSource(payload), soapBody.getPayloadResult());
 		DOMResult domResult = new DOMResult();
@@ -68,7 +70,7 @@ public abstract class AbstractSoapBodyTestCase extends AbstractSoapElementTestCa
 
 	@Test
 	public void testAddFaultWithExistingPayload() throws Exception {
-		StringSource contents = new StringSource("<payload xmlns='https://www.springframework.org' />");
+		StringSource contents = new StringSource("<payload xmlns='http://www.springframework.org' />");
 		transformer.transform(contents, soapBody.getPayloadResult());
 		soapBody.addMustUnderstandFault("faultString", Locale.ENGLISH);
 		assertTrue("Body has no fault", soapBody.hasFault());

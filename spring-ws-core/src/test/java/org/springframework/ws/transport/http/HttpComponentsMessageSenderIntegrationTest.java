@@ -16,15 +16,11 @@
 
 package org.springframework.ws.transport.http;
 
-import static org.hamcrest.core.IsEqual.*;
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,6 +43,9 @@ import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 import org.springframework.ws.transport.WebServiceConnection;
 import org.springframework.ws.transport.support.FreePortScanner;
 
+import static org.hamcrest.core.IsEqual.*;
+import static org.junit.Assert.*;
+
 public class HttpComponentsMessageSenderIntegrationTest extends AbstractHttpWebServiceMessageSenderIntegrationTestCase {
 
 	@Override
@@ -64,7 +63,7 @@ public class HttpComponentsMessageSenderIntegrationTest extends AbstractHttpWebS
 		assertThat(route1.getTargetHost().getHostName(), equalTo("www.example.com"));
 		assertTrue((route1.getTargetHost().getPort() == -1) || (route1.getTargetHost().getPort() == 443));
 
-		final String url2 = "https://www.example.com:8080";
+		final String url2 = "http://www.example.com:8080";
 		URI uri2 = new URI(url2);
 		HttpHost host2 = new HttpHost(uri2.getHost(), uri2.getPort(), uri2.getScheme());
 		HttpRoute route2 = new HttpRoute(host2);
@@ -72,7 +71,7 @@ public class HttpComponentsMessageSenderIntegrationTest extends AbstractHttpWebS
 		assertThat(route2.getTargetHost().getHostName(), equalTo("www.example.com"));
 		assertThat(route2.getTargetHost().getPort(), equalTo(8080));
 
-		final String url3 = "https://www.springframework.org";
+		final String url3 = "http://www.springframework.org";
 		URI uri3 = new URI(url3);
 		HttpHost host3 = new HttpHost(uri3.getHost(), uri3.getPort(), uri3.getScheme());
 		HttpRoute route3 = new HttpRoute(host3);

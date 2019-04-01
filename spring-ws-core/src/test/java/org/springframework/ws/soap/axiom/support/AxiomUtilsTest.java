@@ -69,7 +69,7 @@ public class AxiomUtilsTest {
 
 	@Test
 	public void testToNamespaceUndeclared() throws Exception {
-		QName qName = new QName("https://www.example.com", "localPart");
+		QName qName = new QName("http://www.example.com", "localPart");
 		OMNamespace namespace = AxiomUtils.toNamespace(qName, element);
 		Assert.assertNotNull("Invalid namespace", namespace);
 		Assert.assertEquals("Invalid namespace", qName.getNamespaceURI(), namespace.getNamespaceURI());
@@ -87,7 +87,7 @@ public class AxiomUtilsTest {
 
 	@Test
 	public void testToNamespacePrefixUndeclared() throws Exception {
-		QName qName = new QName("https://www.example.com", "localPart", "otherPrefix");
+		QName qName = new QName("http://www.example.com", "localPart", "otherPrefix");
 		OMNamespace namespace = AxiomUtils.toNamespace(qName, element);
 		Assert.assertNotNull("Invalid namespace", namespace);
 		Assert.assertEquals("Invalid namespace", qName.getNamespaceURI(), namespace.getNamespaceURI());

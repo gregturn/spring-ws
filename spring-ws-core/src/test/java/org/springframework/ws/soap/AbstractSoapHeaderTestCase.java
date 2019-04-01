@@ -19,19 +19,22 @@ package org.springframework.ws.soap;
 import java.util.Iterator;
 import javax.xml.namespace.QName;
 
+import org.junit.Test;
+
 import org.springframework.xml.transform.StringResult;
 import org.springframework.xml.transform.StringSource;
 
-import org.junit.Test;
-
-import static org.custommonkey.xmlunit.XMLAssert.assertXMLEqual;
-import static org.junit.Assert.*;
+import static org.custommonkey.xmlunit.XMLAssert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractSoapHeaderTestCase extends AbstractSoapElementTestCase {
 
 	protected SoapHeader soapHeader;
 
-	protected static final String NAMESPACE = "https://www.springframework.org";
+	protected static final String NAMESPACE = "http://www.springframework.org";
 
 	protected static final String PREFIX = "spring";
 
@@ -51,10 +54,10 @@ public abstract class AbstractSoapHeaderTestCase extends AbstractSoapElementTest
 		assertEquals("Invalid qName for element", qName, headerElement.getName());
 		Iterator<SoapHeaderElement> iterator = soapHeader.examineAllHeaderElements();
 		assertTrue("SoapHeader has no elements", iterator.hasNext());
-		String payload = "<content xmlns='https://www.springframework.org'/>";
+		String payload = "<content xmlns='http://www.springframework.org'/>";
 		transformer.transform(new StringSource(payload), headerElement.getResult());
 		assertHeaderElementEqual(headerElement,
-				"<spring:localName xmlns:spring='https://www.springframework.org'><spring:content/></spring:localName>");
+				"<spring:localName xmlns:spring='http://www.springframework.org'><spring:content/></spring:localName>");
 	}
 
 	@Test
@@ -73,7 +76,7 @@ public abstract class AbstractSoapHeaderTestCase extends AbstractSoapElementTest
 		SoapHeaderElement headerElement = soapHeader.addHeaderElement(qName);
 		assertEquals("Invalid qName for element", qName, headerElement.getName());
 		assertNotNull("No SoapHeaderElement returned", headerElement);
-		String payload = "<content xmlns='https://www.springframework.org'/>";
+		String payload = "<content xmlns='http://www.springframework.org'/>";
 		transformer.transform(new StringSource(payload), headerElement.getResult());
 		Iterator<SoapHeaderElement> iterator = soapHeader.examineAllHeaderElements();
 		assertNotNull("header element iterator is null", iterator);
@@ -83,7 +86,7 @@ public abstract class AbstractSoapHeaderTestCase extends AbstractSoapElementTest
 		StringResult result = new StringResult();
 		transformer.transform(headerElement.getSource(), result);
 		assertXMLEqual("Invalid contents of header element",
-				"<spring:localName xmlns:spring='https://www.springframework.org'><spring:content/></spring:localName>",
+				"<spring:localName xmlns:spring='http://www.springframework.org'><spring:content/></spring:localName>",
 				result.toString());
 		assertFalse("header element iterator has too many elements", iterator.hasNext());
 	}
@@ -125,7 +128,7 @@ public abstract class AbstractSoapHeaderTestCase extends AbstractSoapElementTest
 	@Test
 	public void testGetResult() throws Exception {
 		String content =
-				"<spring:localName xmlns:spring='https://www.springframework.org'><spring:content/></spring:localName>";
+				"<spring:localName xmlns:spring='http://www.springframework.org'><spring:content/></spring:localName>";
 		transformer.transform(new StringSource(content), soapHeader.getResult());
 		Iterator<SoapHeaderElement> iterator = soapHeader.examineAllHeaderElements();
 		assertTrue("Header has no children", iterator.hasNext());

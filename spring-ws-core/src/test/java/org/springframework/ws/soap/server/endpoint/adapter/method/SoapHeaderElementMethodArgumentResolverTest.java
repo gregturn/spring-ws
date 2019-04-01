@@ -19,15 +19,15 @@ package org.springframework.ws.soap.server.endpoint.adapter.method;
 import java.util.List;
 import javax.xml.namespace.QName;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import org.springframework.core.MethodParameter;
 import org.springframework.ws.context.MessageContext;
 import org.springframework.ws.server.endpoint.adapter.method.AbstractMethodArgumentResolverTestCase;
 import org.springframework.ws.soap.SoapHeaderElement;
 import org.springframework.ws.soap.SoapMessage;
 import org.springframework.ws.soap.server.endpoint.annotation.SoapHeader;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import static org.junit.Assert.*;
 
@@ -133,18 +133,18 @@ public class SoapHeaderElementMethodArgumentResolverTest extends AbstractMethodA
 	public void soapHeaderWithEmptyValue(@SoapHeader("") SoapHeaderElement element) {
 	}
 
-	public void soapHeaderElement(@SoapHeader("{https://springframework.org/ws}header") SoapHeaderElement element) {
+	public void soapHeaderElement(@SoapHeader("{http://springframework.org/ws}header") SoapHeaderElement element) {
 	}
 
 	public void soapHeaderElementList(@SoapHeader(
-			"{https://springframework.org/ws}header") List<SoapHeaderElement> elements) {
+			"{http://springframework.org/ws}header") List<SoapHeaderElement> elements) {
 	}
 
-	public void soapHeaderMismatch(@SoapHeader("{https://springframework.org/ws}xxx") SoapHeaderElement element) {
+	public void soapHeaderMismatch(@SoapHeader("{http://springframework.org/ws}xxx") SoapHeaderElement element) {
 	}
 
 	public void soapHeaderMismatchList(@SoapHeader(
-			"{https://springframework.org/ws}xxx") List<SoapHeaderElement> elements) {
+			"{http://springframework.org/ws}xxx") List<SoapHeaderElement> elements) {
 	}
 
 
